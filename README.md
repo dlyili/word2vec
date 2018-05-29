@@ -1,4 +1,4 @@
-word2vec
+﻿d2vec
 ========
 
 [![travis-ci](https://api.travis-ci.org/danielfrg/word2vec.svg)](https://travis-ci.org/danielfrg/word2vec)
@@ -8,6 +8,8 @@ word2vec
 Python interface to Google word2vec.
 
 Training is done using the original C, other functionality is pure python + numpy.
+
+支持windows vs2017编译，去掉了 word2vec_noop.pyx 无用的代码
 
 ## Installation
 

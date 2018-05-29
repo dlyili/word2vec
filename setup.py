@@ -110,13 +110,12 @@ setup(
     name='word2vec',
     version='0.9.2',
     cmdclass=cmdclass,
-    ext_modules=cythonize("word2vec/word2vec_noop.pyx"),
-    author='Daniel Rodriguez',
-    author_email='df.rodriguez143@gmail.com',
-    url='https://github.com/danielfrg/word2vec',
+    author='Jiang jianjun',
+    author_email='jiangjianjun716@163.com',
+    url='https://github.com/dlyili/word2vec',
     description='Wrapper for Google word2vec',
     license='Apache License Version 2.0, January 2004',
     packages=find_packages(),
     data_files=data_files,
-    install_requires=['numpy', 'cython']
+    install_requires=['numpy']
 )

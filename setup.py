@@ -42,11 +42,12 @@ class install(_install):
             os.makedirs(self.TARGET_DIR)
 
         if sys.platform == 'win32':
-            self.compile_c('win32/word2vec.c', 'word2vec.exe')
-            self.compile_c('win32/word2phrase.c', 'word2phrase.exe')
-            self.compile_c('win32/distance.c', 'word2vec-distance.exe')
-            self.compile_c('win32/word-analogy.c', 'word2vec-word-analogy.exe')
-            self.compile_c('win32/compute-accuracy.c', 'word2vec-compute-accuracy.exe')
+            #self.compile_c('win32/word2vec.c', 'word2vec.exe')
+            #self.compile_c('win32/word2phrase.c', 'word2phrase.exe')
+            #self.compile_c('win32/distance.c', 'word2vec-distance.exe')
+            #self.compile_c('win32/word-analogy.c', 'word2vec-word-analogy.exe')
+            #self.compile_c('win32/compute-accuracy.c', 'word2vec-compute-accuracy.exe')
+            self.compile_msbuild('win32/vs/word2vec.sln')
         else:
             self.compile_c('word2vec.c', 'word2vec')
             self.compile_c('word2phrase.c', 'word2phrase')
@@ -77,6 +78,17 @@ class install(_install):
 
         if return_code > 0:
             exit(return_code)
+            
+    def compile_msbuild(self, sln):
+        ms_bulid = 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/MSBuild/15.0/Bin/MSBuild.exe'
+        sln = os.path.join(self.C_SOURCE, sln)
+        command = [ms_bulid, sln, '/t:Rebuild', '/p:Configuration=Release']
+        print(command)
+        return_code = subprocess.call(command)
+
+        if return_code > 0:
+            print('tttt')
+            exit(return_code)        
 
 cmdclass=versioneer.get_cmdclass()
 cmdclass.update({'install': install})
@@ -96,7 +108,7 @@ else:
 
 setup(
     name='word2vec',
-    version=versioneer.get_version(),
+    version='0.9.2',
     cmdclass=cmdclass,
     ext_modules=cythonize("word2vec/word2vec_noop.pyx"),
     author='Daniel Rodriguez',
